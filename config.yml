@@ -1,0 +1,11 @@
+RAW_ROOT: 'dataset/raw'
+PROCESSED_ROOT: 'dataset/processed/processed'
+NOT_PROCESSED_ROOT: 'dataset/processed/not_processed'
+BATCH_SIZE: 256
+EPOCHS: 100
+CHECK_POINT: null
+BEST_MODEL: null
+SAVE_FREQ: 1
+TEST_FREQ: 1
+H: 112
+W: 112
