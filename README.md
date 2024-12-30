@@ -6,6 +6,7 @@ Face Recognition with MobileFaceNet model
 ## Overview
 
 This repository contains the implementation of the MobileFaceNet model for face recognition. MobileFaceNet is a lightweight neural network designed for efficient face recognition on mobile and embedded devices.
+Accuracy: 0.99
 
 ## Table of Contents
 
@@ -13,11 +14,6 @@ This repository contains the implementation of the MobileFaceNet model for face 
 - [Installation](#installation)
 - [Usage](#usage)
 - [Datasets](#datasets)
-- [Training](#training)
-- [Evaluation](#evaluation)
-- [Results](#results)
-- [Contributing](#contributing)
-- [License](#license)
 
 ## Installation
 
