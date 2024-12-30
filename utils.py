@@ -156,7 +156,7 @@ def save_checkpoint(state, filename='checkpoint.pth.tar'):
 
 def load_checkpoint(filename='checkpoint.pth.tar', device='cpu'):
     if os.path.isfile(filename):
-        checkpoint = torch.load(filename,weights_only=True, map_location=device)
+        checkpoint = torch.load(filename, weights_only=True, map_location=device)
         return checkpoint
     else:
         return None

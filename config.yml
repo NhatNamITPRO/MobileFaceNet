@@ -4,7 +4,7 @@ NOT_PROCESSED_ROOT: 'dataset/processed/not_processed'
 BATCH_SIZE: 256
 EPOCHS: 100
 CHECK_POINT: null
-BEST_MODEL: null
+BEST_MODEL: 'checkpoints/best_cpkt.ckpt'
 SAVE_FREQ: 1
 TEST_FREQ: 1
 H: 112

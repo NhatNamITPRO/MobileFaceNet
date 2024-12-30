@@ -3,7 +3,7 @@ import cv2
 import torch
 from torchvision import transforms
 from mtcnn import MTCNN
-from utils import load_checkpoint, load_image
+from utils import load_image, save_image
 from model import MobileFacenet
 from preprocess import align_face
 
@@ -44,11 +44,10 @@ def inferal(img_path):
 
     net = MobileFacenet()
     net = net.to(device) 
-    net = torch.nn.DataParallel(net)
 
-    last_ckpt = load_checkpoint(checkpoint_path, device=device)
-    net.load_state_dict(last_ckpt['net_state_dict'])
-
+    ckpt = torch.load(checkpoint_path, map_location=device, weights_only=True)
+    net.load_state_dict(ckpt['net_state_dict'], strict=True)
+    net.eval()
     # Tải hình ảnh
     img = load_image(img_path)
 
@@ -79,16 +78,15 @@ def inferal(img_path):
             aligned_face = align_face(face_image, adjusted_landmarks, H, W)
             aligned_face = (aligned_face - 127.5) / 128
             aligned_face = transforms.ToTensor()(aligned_face)
-            aligned_face = aligned_face.unsqueeze(0)  
+            aligned_face = aligned_face.unsqueeze(0).to(device).float()  
 
             logits = net(aligned_face)
             _, predicted = torch.max(logits, 1)
             text_label = dict_label[predicted.item()]
+            print("Label:", text_label)
             cv2.rectangle(img, (x, y), (x + width, y + height), (255, 0, 0), 2)
-            cv2.putText(img, text_label, (x, y - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (255, 0, 0), 2)
-        cv2.imshow('Detected Faces', img)
-        cv2.waitKey(0)
-        cv2.destroyAllWindows()
+            cv2.putText(img, text_label, (x, y - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 0, 0), 1)
+        save_image(img, 'assests/output.jpg')
         return "Inference completed"
         
 
